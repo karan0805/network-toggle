@@ -1,0 +1,221 @@
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      x:Name="Surface" Width="400"
+      TextElement.FontFamily="Segoe UI" TextElement.Foreground="White">
+
+  <Grid.Resources>
+    <LinearGradientBrush x:Key="RimBrush" StartPoint="0,0" EndPoint="1,1">
+      <GradientStop Color="#B3FFFFFF" Offset="0"/>
+      <GradientStop Color="#1FFFFFFF" Offset="0.4"/>
+      <GradientStop Color="#14FFFFFF" Offset="0.65"/>
+      <GradientStop Color="#66FFFFFF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ChipBrush" StartPoint="0,0" EndPoint="0,1">
+      <GradientStop Color="#2EFFFFFF" Offset="0"/>
+      <GradientStop Color="#0FFFFFFF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <Style x:Key="Chip" TargetType="Border">
+      <Setter Property="Background" Value="{StaticResource ChipBrush}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RimBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="18"/>
+      <Setter Property="Padding" Value="12,9"/>
+    </Style>
+
+    <Style x:Key="ChipLabel" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="11"/>
+      <Setter Property="Foreground" Value="#BFFFFFFF"/>
+    </Style>
+
+    <Style x:Key="ChipValue" TargetType="TextBlock">
+      <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+      <Setter Property="FontSize" Value="21"/>
+    </Style>
+
+    <Style x:Key="ChipUnit" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="11"/>
+      <Setter Property="Foreground" Value="#BFFFFFFF"/>
+      <Setter Property="Margin" Value="4,0,0,3"/>
+      <Setter Property="VerticalAlignment" Value="Bottom"/>
+    </Style>
+
+    <Style x:Key="SegmentButton" TargetType="Button">
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border Background="Transparent"><ContentPresenter/></Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="RoundButton" TargetType="Button">
+      <Setter Property="Width" Value="28"/>
+      <Setter Property="Height" Value="28"/>
+      <Setter Property="Margin" Value="6,0,0,0"/>
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+      <Setter Property="FontSize" Value="9"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="Face" CornerRadius="14" BorderThickness="1"
+                    Background="{StaticResource ChipBrush}" BorderBrush="{StaticResource RimBrush}">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Face" Property="Background" Value="#4DFFFFFF"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="PillButton" TargetType="Button">
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="FontSize" Value="11.5"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="Face" CornerRadius="13" BorderThickness="1" Padding="14,4"
+                    Background="{StaticResource ChipBrush}" BorderBrush="{StaticResource RimBrush}">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Face" Property="Background" Value="#4DFFFFFF"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </Grid.Resources>
+
+  <!-- Glass layers: dark tint, coloured glow, top sheen, bright rim -->
+  <Rectangle>
+    <Rectangle.Fill>
+      <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#73202530" Offset="0"/>
+        <GradientStop Color="#8C0F1218" Offset="1"/>
+      </LinearGradientBrush>
+    </Rectangle.Fill>
+  </Rectangle>
+
+  <Ellipse x:Name="Glow" Width="300" Height="240" Margin="-90,-90,0,0"
+           HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False">
+    <Ellipse.Effect><BlurEffect Radius="60"/></Ellipse.Effect>
+  </Ellipse>
+
+  <Rectangle IsHitTestVisible="False">
+    <Rectangle.Fill>
+      <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#2EFFFFFF" Offset="0"/>
+        <GradientStop Color="#00FFFFFF" Offset="0.42"/>
+      </LinearGradientBrush>
+    </Rectangle.Fill>
+  </Rectangle>
+
+  <Border CornerRadius="30" BorderThickness="1.2" BorderBrush="{StaticResource RimBrush}" IsHitTestVisible="False"/>
+
+  <Grid Margin="22,18,22,16">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <DockPanel Grid.Row="0">
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+        <Button x:Name="MinimizeButton" Style="{StaticResource RoundButton}" Content="&#xE921;"/>
+        <Button x:Name="CloseButton" Style="{StaticResource RoundButton}" Content="&#xE8BB;"/>
+      </StackPanel>
+      <TextBlock x:Name="StatusLabel" FontSize="13" Foreground="#CCFFFFFF" VerticalAlignment="Center"/>
+    </DockPanel>
+
+    <DockPanel Grid.Row="1" Margin="0,2,0,0">
+      <TextBlock x:Name="StatusName" FontFamily="Segoe UI Semibold" FontSize="31"/>
+      <TextBlock x:Name="StatusDetail" Margin="10,0,0,6" FontSize="16" Foreground="#CCFFFFFF"
+                 VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+    </DockPanel>
+
+    <Grid Grid.Row="2" Margin="0,14,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="8"/>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="8"/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+      <Border Grid.Column="0" Style="{StaticResource Chip}">
+        <StackPanel>
+          <TextBlock Style="{StaticResource ChipLabel}" Text="Download"/>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="DownValue" Style="{StaticResource ChipValue}"/>
+            <TextBlock x:Name="DownUnit" Style="{StaticResource ChipUnit}"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+      <Border Grid.Column="2" Style="{StaticResource Chip}">
+        <StackPanel>
+          <TextBlock Style="{StaticResource ChipLabel}" Text="Upload"/>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="UpValue" Style="{StaticResource ChipValue}"/>
+            <TextBlock x:Name="UpUnit" Style="{StaticResource ChipUnit}"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+      <Border Grid.Column="4" Style="{StaticResource Chip}">
+        <StackPanel>
+          <TextBlock Style="{StaticResource ChipLabel}" Text="Link speed"/>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="LinkValue" Style="{StaticResource ChipValue}"/>
+            <TextBlock x:Name="LinkUnit" Style="{StaticResource ChipUnit}"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <!-- Connection list with the sliding glass pill -->
+    <Border Grid.Row="3" Margin="0,14,0,0" CornerRadius="30" BorderThickness="1"
+            Background="#33000000" BorderBrush="#26FFFFFF">
+      <Grid Margin="4">
+        <Border x:Name="Thumb" Height="56" Margin="0,2,0,0" CornerRadius="26"
+                VerticalAlignment="Top" BorderThickness="1.2"
+                BorderBrush="{StaticResource RimBrush}" RenderTransformOrigin="0.5,0.5">
+          <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+              <GradientStop Color="#59FFFFFF" Offset="0"/>
+              <GradientStop Color="#1FFFFFFF" Offset="0.55"/>
+              <GradientStop Color="#33FFFFFF" Offset="1"/>
+            </LinearGradientBrush>
+          </Border.Background>
+          <Border.Effect>
+            <DropShadowEffect BlurRadius="16" ShadowDepth="3" Direction="270" Opacity="0.35"/>
+          </Border.Effect>
+        </Border>
+
+        <StackPanel x:Name="Rows"/>
+      </Grid>
+    </Border>
+
+    <StackPanel Grid.Row="4" VerticalAlignment="Center">
+      <TextBlock x:Name="NoteText" Margin="4,0,4,8" FontSize="11.5" Foreground="#BFFFFFFF"
+                 TextAlignment="Center" TextWrapping="Wrap"/>
+      <Button x:Name="RestoreButton" Style="{StaticResource PillButton}" HorizontalAlignment="Center"
+              Content="Restore Windows default"/>
+    </StackPanel>
+  </Grid>
+</Grid>
